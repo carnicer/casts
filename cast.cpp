@@ -1,6 +1,8 @@
 
 #include <stdio.h>
+
 #include <cstdint>
+#include <string>
 
 int displayDouble(double d)
 {
@@ -16,9 +18,23 @@ int displayDouble(double d)
     return ret;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    displayDouble(2.5e-4);
-    displayDouble(2.5e+4);
+    if (argc > 1)
+    {
+        for(int i = 1 ; i < argc ; ++i)
+        {
+            printf("%s\n", argv[i]);
+            double d = std::stod(std::string(argv[i]));
+            displayDouble(d);
+            puts("====");
+        }
+    }
+    else
+    {
+        puts("no parameters provided, using default test values");
+        displayDouble(2.5e-4);
+        displayDouble(2.5e+4);
+    }
 }
 
